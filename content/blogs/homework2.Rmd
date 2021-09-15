@@ -1,0 +1,133 @@
+---
+title: "Biden's Approval Margins"
+date: '2017-10-31T22:26:13-05:00'
+description: Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna
+  sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa
+  sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem
+  consequat tincidunt. Vivamus et sagittis tempus.
+draft: no
+image: biden.jpg
+keywords: ''
+slug: homework2
+categories:
+- ''
+- ''
+---
+
+```{r picture1, echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/biden.jpg", error=FALSE)
+```
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, include=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
+library(readxl)
+library(vroom)
+library(dplyr)
+library(ExcelFunctionsR)
+library(infer)
+```
+
+
+As we saw in class, fivethirtyeight.com has detailed data on [all polls that track the president's approval ](https://projects.fivethirtyeight.com/biden-approval-ratings)
+
+```{r, cache=TRUE, echo=FALSE}
+# Import approval polls data directly off fivethirtyeight website
+approval_polllist <- read_csv('https://projects.fivethirtyeight.com/biden-approval-data/approval_polllist.csv') 
+
+
+glimpse(approval_polllist) 
+
+library(lubridate) 
+
+clean_approval_polllist <- approval_polllist %>%
+  mutate(enddate=mdy(enddate),
+         week=isoweek(enddate)) 
+
+# Use `lubridate` to fix dates, as they are given as characters.
+```
+
+## Create a plot
+
+We calculate the average net approval rate (approve- disapprove) for each week since he got into office. We will plot the net approval, along with its 95% confidence interval. 
+
+```{r trump_margins, echo=FALSE, out.width="100%"}
+knitr::include_graphics(here::here("images", "biden_approval_margin.png"), error = FALSE)
+```
+
+```{r, echo=FALSE}
+clean_approval_polllist <- clean_approval_polllist %>%
+  filter(subgroup == "Adults") %>%
+  mutate(daily_approval_margin = approve - disapprove)
+```
+
+
+```{r, echo=FALSE}
+weekly_avg_app_rates <- clean_approval_polllist %>%
+  group_by(week) %>%
+  summarize( mean_weekly_approval_margin = mean(daily_approval_margin, na.rm = TRUE),
+             number_polls = n(),
+             std_weekly_approval_margin = STDEV(daily_approval_margin)) %>%
+
+  mutate(lower_bound_CI_app_rate = mean_weekly_approval_margin - qt(0.975, df=number_polls-1)*std_weekly_approval_margin/sqrt(number_polls),
+         upper_bound_CI_app_rate = mean_weekly_approval_margin + qt(0.975, df=number_polls-1)*std_weekly_approval_margin/sqrt(number_polls))
+         
+```
+
+
+```{r, echo=FALSE}
+ggplot(weekly_avg_app_rates, aes(x=week)) +
+  geom_point(aes(y=mean_weekly_approval_margin, color="orangered")) +
+  geom_line( aes(y=mean_weekly_approval_margin, color="orangered")) +
+  geom_ribbon(aes(ymin = lower_bound_CI_app_rate, 
+                 ymax = upper_bound_CI_app_rate), 
+                 show.legend = NA,
+                 fill = "grey",
+                 colour = "orange", 
+                 alpha = 0.2) +
+  geom_smooth(aes(y= mean_weekly_approval_margin), fill=NA)+
+  geom_hline(yintercept=0, color="orange", size=3)+
+  theme_bw() +
+  labs (
+    title = "Estimating Approval Margin (Approve - Disapprove) for Joe Biden",
+    subtitle = "Weekly average of all polls",
+    x = "Week of the year",
+    y = "Average Approval Margin (Approve - Disapprove)"
+  ) +
+  theme(legend.position = "none")
+```
+
+## Compare Confidence Intervals
+
+Let's compare the confidence intervals of week 3 and week 25. The data has since been updated, but in the original plot, we can see that the 95% confidence intervals of week 3 are very far apart, compared to week 25. We can thus say that the mean of week 3 polls is going to be 95% statistically significant in a much wider range than the week 25 polls.
+
+
+# Details
+
+- Who did you collaborate with: Chuhan Zhang, Anuhya Yallabandi, Estelle Tessaro, Francois Mizrahi, Zervaan Borok, Zhicong Hu
+- Approximately how much time did you spend on this problem set: A lot.... 
+- What, if anything, gave you the most trouble: the Biden exercice
+
