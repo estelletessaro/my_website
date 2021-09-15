@@ -8,7 +8,7 @@ description: Nullam et orci eu lorem consequat tincidunt vivamus et sagittis mag
 draft: no
 image: germany.jpg
 keywords: ''
-slug: homework1
+slug: homework1a
 categories:
 - ''
 - ''

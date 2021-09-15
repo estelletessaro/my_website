@@ -81,13 +81,21 @@ params:
         title: I love sunsets
         url: blogs/aboutme
       - image: germany.jpg
-        subtitle: Homework 1
+        subtitle: Homework 1A
         title: Opinion Polls for 2021 German Elections
-        url: blogs/homework1
+        url: blogs/homework1a
       - image: biden.jpg
-        subtitle: Homework 2
+        subtitle: Homework 2A
         title: Biden's Approval Margins
-        url: blogs/homework2
+        url: blogs/homework2a
+      - image: wine.jpg
+        subtitle: Homework 1B
+        title: Where People Drink the Most Wine, Beer & Spirits
+        url: blogs/homework1b
+      - image: londonbike.jpg
+        subtitle: Homework 2B
+        title: London Bike Rentals over Time
+        url: blogs/homework2b
       - image: genderdiscrimination.jpg
         subtitle: Homework 3
         title: Pay Discrimination - Omega
