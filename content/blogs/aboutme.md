@@ -5,10 +5,26 @@ categories:
 date: "2017-10-31T21:28:43-05:00"
 description: ""
 draft: false
-image: estelle.jpg
+image: 
 keywords: ""
 slug: aboutme
 title: About Me
 ---
 
-Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.
+Hi! I'm Estelle!
+
+Like I mentionned on the previous page, I love sunsets! 
+
+(add image of me at sunset using info from whatsapp group)
+
+I also love other things though. First of all, I love to hang out with my friends and loved ones. (add pics of jack,fam,bxfriends,barcafriends) 
+
+I enjoy going to a bar with them and have a tapas and a beer in the sun, which brings me to my next point. I loooove food. Cooking food, eating food, smelling food, I love it all! 
+
+I can't wait to discover London and it's food scene now that I'm here to complete my Master in Analytics and Management at London Business School. And I also heard dinners with Kostis are legendary! 
+
+Before London, I lived in Barcelona for four years, where I completed my undergraduate Business degree at ESADE Business School. While I absolutely loved my time there (and miss the BCN sun), I'm so excited to be put outside of my comfort zone again in this new city. 
+
+Having lived in Brussels my whole life and coming from a Belgian-Italian family, I've come to love discovering new cultures and languages. Hoping London will be everything I expect it to be! 
+
+If you're still reading this page, thanks, and have fun discovering the rest of my website!
