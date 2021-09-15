@@ -76,15 +76,15 @@ params:
   tiles:
     enable: yes
     showcase:
-      - image: brussels.jpg
+      - image: sunset.jpg
         subtitle: About Me
         title: I love sunsets
         url: blogs/aboutme
-      - image: brussels.jpg
+      - image: germany.jpg
         subtitle: Homework 1
         title: Opinion Polls for 2021 German Elections
         url: blogs/homework1
-      - image: germany.jpg
+      - image: biden.jpg
         subtitle: Homework 2
         title: Biden's Approval Margins
         url: blogs/homework2
