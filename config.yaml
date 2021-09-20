@@ -77,6 +77,10 @@ params:
         subtitle: About Me
         title: I love sunsets
         url: blogs/aboutme
+      - image: genderdiscrimination.jpg
+        subtitle: Homework 3
+        title: Pay Discrimination - Omega
+        url: blogs/homework3
       - image: germany.jpg
         subtitle: Homework 1A
         title: Opinion Polls for 2021 German Elections
@@ -93,10 +97,7 @@ params:
         subtitle: Homework 2B
         title: London Bike Rentals over Time
         url: blogs/homework2b
-      - image: genderdiscrimination.jpg
-        subtitle: Homework 3
-        title: Pay Discrimination - Omega
-        url: blogs/homework3
+
   two:
     buttonText: My CV
     enable: yes
