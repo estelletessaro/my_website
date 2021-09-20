@@ -1,10 +1,7 @@
 ---
 title: "Opinion Polls for 2021 German Elections"
 date: '2017-10-31T22:26:13-05:00'
-description: Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna
-  sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa
-  sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem
-  consequat tincidunt. Vivamus et sagittis tempus.
+description: The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor). I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election).
 draft: no
 image: germany.jpg
 keywords: ''
@@ -17,10 +14,7 @@ categories:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<div id="challenge-2-opinion-polls-for-the-2021-german-elections" class="section level1">
-<h1>Challenge 2: Opinion polls for the 2021 German elections</h1>
-<p>The Guardian newspaper has an <a href="https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor">election poll tracker for the upcoming German election</a>.
-The list of the opinion polls since Jan 2021 can be found at <a href="https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election">Wikipedia</a> and your task is to reproduce the graph similar to the one produced by the Guardian.</p>
+<p>The Guardian newspaper has an <a href="https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor">election poll tracker for the upcoming German election</a>. I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at <a href="https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election">Wikipedia</a>.</p>
 <p>The following code will scrape the wikipedia page and import the table in a dataframe.</p>
 <pre class="r"><code>url &lt;- &quot;https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election&quot;
 # https://www.economist.com/graphic-detail/who-will-succeed-angela-merkel
@@ -55,10 +49,12 @@ german_election_polls &lt;- polls[[1]] %&gt;% # the first table on the page cont
          month = month(end_date),
          week = isoweek(end_date)
          )</code></pre>
+<p>Let’s now reproduce the graph made by the Guardian.</p>
 <pre class="r"><code>german_election_polls$samplesize &lt;- as.numeric(gsub(&quot;,&quot;,&quot;&quot;,german_election_polls$samplesize))
 german_election_polls$samplesize &lt;- as.numeric(german_election_polls$samplesize)
 german_election_polls &lt;- na.omit(german_election_polls)
 
+#First, we create the polls for each party
 german_election_polls &lt;- german_election_polls %&gt;%
   mutate(union_votes = union*samplesize/100,
          spd_votes = spd*samplesize/100,
@@ -67,6 +63,7 @@ german_election_polls &lt;- german_election_polls %&gt;%
          linke_votes = linke*samplesize/100,
          grune_votes = grune*samplesize/100)
 
+#Then, we make sure to get the daily polls of each party.
 daily_german_election_polls &lt;- german_election_polls %&gt;%
   group_by(end_date) %&gt;%
   summarise(total_sample_size = sum(samplesize),
@@ -77,6 +74,7 @@ daily_german_election_polls &lt;- german_election_polls %&gt;%
             total_linke = sum(linke_votes),
             total_grune = sum(grune_votes))
 
+#Next, we create an empty dataframe in which we&#39;ll later add the biweekly average for each party.
 german_election_polls$end_date &lt;- ymd(german_election_polls$end_date)
 
 daily_german_election_polls$total_size_14day = NA
@@ -87,6 +85,7 @@ daily_german_election_polls$fdp_size_14day = NA
 daily_german_election_polls$linke_size_14day = NA
 daily_german_election_polls$grune_size_14day = NA
 
+#Let&#39;s now fill this dataframe with the biweekly averages.
 for (i in 1:nrow(daily_german_election_polls)){
   current_day = daily_german_election_polls$end_date[i]
   day14 = current_day-14
@@ -135,7 +134,8 @@ daily_german_election_polls &lt;- daily_german_election_polls %&gt;%
          fdp_rate = total_fdp/total_sample_size,
          linke_rate = total_linke/total_sample_size,
          grune_rate = total_grune/total_sample_size)</code></pre>
-<pre class="r"><code>colors &lt;- c(&quot;Union&quot; = &quot;black&quot;, &quot;SPD&quot; = &quot;red&quot;, &quot;AfD&quot; = &quot;blue&quot;, 
+<pre class="r"><code>#Now, let&#39;s plot our data according to the parties&#39; official colors.
+colors &lt;- c(&quot;Union&quot; = &quot;black&quot;, &quot;SPD&quot; = &quot;red&quot;, &quot;AfD&quot; = &quot;blue&quot;, 
             &quot;FDP&quot; = &quot;yellow&quot;, &quot;Linke&quot; = &quot;purple&quot;, &quot;Grune&quot; = &quot;green&quot;)
 
 ggplot(daily_german_election_polls, aes(x=end_date)) +
@@ -158,26 +158,3 @@ ggplot(daily_german_election_polls, aes(x=end_date)) +
   scale_y_continuous(labels = scales::percent) +
   scale_colour_manual(values = colors)</code></pre>
 <p><img src="/blogs/homework1a_files/figure-html/unnamed-chunk-2-1.png" width="648" style="display: block; margin: auto;" /></p>
-</div>
-<div id="deliverables" class="section level1">
-<h1>Deliverables</h1>
-<p>There is a lot of explanatory text, comments, etc. You do not need these, so delete them and produce a stand-alone document that you could share with someone. Knit the edited and completed R Markdown file as an HTML document (use the “Knit” button at the top of the script editor window) and upload it to Canvas.</p>
-</div>
-<div id="details" class="section level1">
-<h1>Details</h1>
-<ul>
-<li>Who did you collaborate with: TYPE NAMES HERE</li>
-<li>Approximately how much time did you spend on this problem set: ANSWER HERE</li>
-<li>What, if anything, gave you the most trouble: ANSWER HERE</li>
-</ul>
-<p><strong>Please seek out help when you need it,</strong> and remember the <a href="https://mam2022.netlify.app/syllabus/#the-15-minute-rule" target="_blank">15-minute rule</a>. You know enough R (and have enough examples of code from class and your readings) to be able to do this. If you get stuck, ask for help from others, post a question on Slack– and remember that I am here to help too!</p>
-<blockquote>
-<p>As a true test to yourself, do you understand the code you submitted and are you able to explain it to someone else?</p>
-</blockquote>
-</div>
-<div id="rubric" class="section level1">
-<h1>Rubric</h1>
-<p>Check minus (1/5): Displays minimal effort. Doesn’t complete all components. Code is poorly written and not documented. Uses the same type of plot for each graph, or doesn’t use plots appropriate for the variables being analyzed.</p>
-<p>Check (3/5): Solid effort. Hits all the elements. No clear mistakes. Easy to follow (both the code and the output).</p>
-<p>Check plus (5/5): Finished all components of the assignment correctly and addressed both challenges. Code is well-documented (both self-documented and with additional comments as necessary). Used tidyverse, instead of base R. Graphs and tables are properly labelled. Analysis is clear and easy to follow, either because graphs are labeled clearly or you’ve written additional text to describe how you interpret the output.</p>
-</div>

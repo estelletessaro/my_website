@@ -11,7 +11,7 @@ categories:
 - ''
 ---
 
-```{r picture1, echo=FALSE, out.width="100%"}
+```{r picture1,include=FALSE, out.width="100%"}
 knitr::include_graphics("img/biden.jpg", error=FALSE)
 ```
 
