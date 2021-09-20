@@ -57,9 +57,6 @@ params:
   image: ''
   name: Your name
   navigation:
-    button1:
-      - name: Get Started
-        url: blogs
     button2:
       - name: Log In
         url: '#'
@@ -67,9 +64,9 @@ params:
       - name: Home
         url: '#'
       - name: About Me
-        url: blogs
+        url: blogs/aboutme
       - name: Portfolio
-        url: blogs/ipsum
+        url: blogs
     menu: Menu
     subtitle: 
     title: Estelle
@@ -105,4 +102,4 @@ params:
     enable: yes
     subtitle: "Find more details of my early-career and education experiences below."
     title: Learn more about me
-    url: blogs
+    url: blogs/mycv

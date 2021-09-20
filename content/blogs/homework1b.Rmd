@@ -1,10 +1,7 @@
 ---
 title: "Where People Drink the Most Wine, Beer and Spirits"
 date: '2017-10-31T22:26:13-05:00'
-description: Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna
-  sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa
-  sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem
-  consequat tincidunt. Vivamus et sagittis tempus.
+description: Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. I analyse and plot consumption of beer, wine and spirits by country.
 draft: no
 image: wine.jpg
 keywords: ''
@@ -52,10 +49,10 @@ library(kableExtra)
 
 # Where Do People Drink The Most Beer, Wine And Spirits?
 
-Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. The data `drinks` is available as part of the `fivethirtyeight` package. Make sure you have installed the `fivethirtyeight` package before proceeding.
+Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. I analyse and plot consumption of beer, wine and spirits by country.
 
 
-```{r, load_alcohol_data}
+```{r, load_alcohol_data, echo=FALSE}
 library(fivethirtyeight)
 data(drinks)
 
@@ -66,26 +63,26 @@ alcohol_direct <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/da
 ```
 
 
-What are the variable types? Any missing values we should worry about? 
-
-```{r glimpse_skim_data}
+```{r glimpse_skim_data, echo=FALSE}
 alcohol_direct %>% 
   glimpse() %>%
   skim()
 
 ```
 
-
-Make a plot that shows the top 25 beer consuming countries
+First, we'll make a plot that shows the top 25 beer consuming countries.
 
 ```{r beer_plot}
+#Let's create a dataframe where we'll store the top 25 beer consuming countries, we'll measure that by beer servings.
 top_countries_beer_servings <- alcohol_direct %>%
   group_by(country) %>%
   arrange(-beer_servings) %>%
   head(25)
 
+#Next, let's create our plot. For this, we'll use ggplot2() from the dyplr package.
 beer_plot <- ggplot(top_countries_beer_servings, aes(x= beer_servings, y= fct_reorder(country, beer_servings))) +
-  geom_col() +
+  geom_col(fill="red4", alpha=0.5) +
+  theme_bw() +
   labs(
     title = "Top 25 countries by beer servings",
     subtitle = "",
@@ -98,16 +95,19 @@ beer_plot
 
 ```
 
-Make a plot that shows the top 25 wine consuming countries
+Next, we'll do the same for the top 25 wine consuming countries.
 
 ```{r wine_plot}
+#Again, we're creating a dataframe where we're ordering the top 25 wine consuming countries.
 top_countries_wine_servings <- alcohol_direct %>%
   group_by(country) %>%
   arrange(-wine_servings) %>%
   head(25)
 
+#And create a new plot, but this time, let's add another color.
 wine_plot <- ggplot(top_countries_wine_servings, aes(x= wine_servings, y= fct_reorder(country, wine_servings))) +
-  geom_col() +
+  geom_col(fill="red3", alpha=0.5) +
+  theme_bw() +
   labs(
     title = "Top 25 countries by wine servings",
     subtitle = "",
@@ -120,17 +120,20 @@ wine_plot
 
 ```
 
-Finally, make a plot that shows the top 25 spirit consuming countries
+Finally, we make a plot that shows the top 25 spirit consuming countries.
 
 ```{r spirit_plot}
+#Let's create another dataframe, specifically for spirit consuming countries.
 top_countries_spirit_servings <- alcohol_direct %>%
   group_by(country) %>%
   arrange(-spirit_servings) %>%
   head(25)
 
+#And then... you guessed it... we'll plot our results.
 spirit_plot <- ggplot(top_countries_spirit_servings, 
                       aes(x= spirit_servings, y= fct_reorder(country, spirit_servings))) +
-  geom_col() +
+  geom_col(fill="red2", alpha=0.5) +
+  theme_bw() +
   labs(
     title = "Top 25 countries by spirit servings",
     subtitle = "",
@@ -144,19 +147,16 @@ spirit_plot
 ```
 
 ```{r plot_for_comparision}
-beer_plot <- beer_plot + geom_col(fill = "red")
-wine_plot <- wine_plot + geom_col(fill = "green")
-spirit_plot <- spirit_plot + geom_col(fill = "blue")
+#Lastly, let's plot them next to eachother to make analysis easier
+beer_plot <- beer_plot + geom_col(fill = "red4", alpha=0.5)
+wine_plot <- wine_plot + geom_col(fill = "red3", alpha=0.5)
+spirit_plot <- spirit_plot + geom_col(fill = "red2", alpha=0.5)
 
 ggarrange(beer_plot, wine_plot, spirit_plot,
                     ncol = 3, nrow = 1)
 ```
 
-
-What can you infer from these plots? Don't just explain what's in the graph, but speculate or tell a short story (1-2 paragraphs max).
-
-> TYPE YOUR ANSWER AFTER (AND OUTSIDE!) THIS BLOCKQUOTE.
-
-First we can infer that European countries tend to consume more wine and beer than spirits.
+So what can we infer from these plots?
+First we notice that European countries tend to consume more wine and beer than spirits.
 It is surprising to see that Germany is only number 4 in the beer consumer ranking behind Gabon, Namibia...
 

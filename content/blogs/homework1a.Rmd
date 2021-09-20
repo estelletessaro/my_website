@@ -1,10 +1,7 @@
 ---
 title: "Opinion Polls for 2021 German Elections"
 date: '2017-10-31T22:26:13-05:00'
-description: Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna
-  sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa
-  sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem
-  consequat tincidunt. Vivamus et sagittis tempus.
+description: The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor). I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election).
 draft: no
 image: germany.jpg
 keywords: ''
@@ -49,15 +46,11 @@ library(kableExtra)
 ```
 
 
-
 # Challenge 2: Opinion polls for the 2021 German elections
 
-The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor).
-The list of the opinion polls since Jan 2021 can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election) and your task is to reproduce the graph similar to the one produced by the Guardian. 
-
+The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor). I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election).
 
 The following code will scrape the wikipedia page and import the table in a dataframe.
-
 
 ```{r, scrape_wikipedia_polling_data, warnings= FALSE, message=FALSE}
 url <- "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election"
