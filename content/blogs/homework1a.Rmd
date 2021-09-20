@@ -48,6 +48,11 @@ library(kableExtra)
 
 The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor). I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election).
 
+```{r picture1, out.width="60%"}
+knitr::include_graphics("/img/blogs/picture1.jpg", error=FALSE)
+```
+
+
 The following code will scrape the wikipedia page and import the table in a dataframe.
 
 ```{r, scrape_wikipedia_polling_data, warnings= FALSE, message=FALSE}
@@ -85,6 +90,8 @@ german_election_polls <- polls[[1]] %>% # the first table on the page contains t
          week = isoweek(end_date)
          )
 ```
+
+
 Let's now reproduce the graph made by the Guardian. 
 
 ```{r warning=FALSE}
@@ -180,18 +187,19 @@ colors <- c("Union" = "black", "SPD" = "red", "AfD" = "blue",
             "FDP" = "yellow", "Linke" = "purple", "Grune" = "green")
 
 ggplot(daily_german_election_polls, aes(x=end_date)) +
-  geom_point(aes(y=union_rate), color="black", size=0.7, alpha=0.3) +
+  geom_point(aes(y=union_rate), color="black", size=0.9, alpha=0.3) +
   geom_line(aes(y=union_rate_14d, color="Union"), size=0.7) +
-  geom_point(aes(y=spd_rate), color="red", size=0.7, alpha=0.3) +
+  geom_point(aes(y=spd_rate), color="red", size=0.9, alpha=0.3) +
   geom_line(aes(y=spd_rate_14d, color="SPD"), size=0.7) +
-  geom_point(aes(y=af_d_rate), color="blue", size=0.7, alpha=0.3) +
+  geom_point(aes(y=af_d_rate), color="blue", size=0.9, alpha=0.3) +
   geom_line(aes(y=af_d_rate_14d, color="AfD"), size=0.7) +
-  geom_point(aes(y=fdp_rate), color="yellow", size=0.7, alpha=0.3) +
+  geom_point(aes(y=fdp_rate), color="yellow", size=0.9, alpha=0.3) +
   geom_line(aes(y=fdp_rate_14d, color="FDP"), size=0.7) +
-  geom_point(aes(y=linke_rate), color="purple", size=0.7, alpha=0.3) +
+  geom_point(aes(y=linke_rate), color="purple", size=0.9, alpha=0.3) +
   geom_line(aes(y=linke_rate_14d, color="Linke"), size=0.7) +
-  geom_point(aes(y=grune_rate), color="green", size=0.7, alpha=0.3) +
+  geom_point(aes(y=grune_rate), color="green", size=0.9, alpha=0.3) +
   geom_line(aes(y=grune_rate_14d, color="Grune"), size=0.7) +
+  theme_bw() +
   labs(title="German election poll tracker: who will be the next chancellor?",
        x="Date",
        y="Vote Percentage",

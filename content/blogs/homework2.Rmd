@@ -11,8 +11,8 @@ categories:
 - ''
 ---
 
-```{r picture1,include=FALSE, out.width="100%"}
-knitr::include_graphics("img/biden.jpg", error=FALSE)
+```{r picture2,include=FALSE, out.width="100%"}
+knitr::include_graphics("img/blogs/biden.jpg", error=FALSE)
 ```
 
 ```{r, setup, include=FALSE}
@@ -48,7 +48,6 @@ library(ExcelFunctionsR)
 library(infer)
 ```
 
-
 Fivethirtyeight.com has detailed data on [all polls that track the president's approval ](https://projects.fivethirtyeight.com/biden-approval-ratings). Let's analyse his approval polls since he came into office in January 2021.
 
 ```{r, cache=TRUE, echo=FALSE}
@@ -73,8 +72,8 @@ clean_approval_polllist <- approval_polllist %>%
 
 We calculate the average net approval rate (approve- disapprove) for each week since he got into office. We will plot the net approval, along with its 95% confidence interval. We will try to copy the following plot:
 
-```{r trump_margins, echo=TRUE, out.width="100%"}
-knitr::include_graphics(here::here("images", "biden_approval_margin.png"), error = FALSE)
+```{r picture1, out.width="60%"}
+ knitr::include_graphics("/img/blogs/picture2.jpg", error=FALSE)
 ```
 
 ```{r}

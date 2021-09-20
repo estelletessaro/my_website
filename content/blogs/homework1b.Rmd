@@ -46,9 +46,6 @@ library(kableExtra)
 ```
 
 
-
-# Where Do People Drink The Most Beer, Wine And Spirits?
-
 Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. I analyse and plot consumption of beer, wine and spirits by country.
 
 

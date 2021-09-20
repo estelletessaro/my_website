@@ -48,8 +48,8 @@ clean_approval_polllist &lt;- approval_polllist %&gt;%
 <div id="create-a-plot" class="section level2">
 <h2>Create a plot</h2>
 <p>We calculate the average net approval rate (approve- disapprove) for each week since he got into office. We will plot the net approval, along with its 95% confidence interval. We will try to copy the following plot:</p>
-<pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;biden_approval_margin.png&quot;), error = FALSE)</code></pre>
-<p><img src="/Users/estelletessaro/Library/Mobile Documents/com~apple~CloudDocs/2021/LBS '21-'22/Applied Statistics/my_website/images/biden_approval_margin.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code> knitr::include_graphics(&quot;/img/blogs/picture2.jpg&quot;, error=FALSE)</code></pre>
+<p><img src="/img/blogs/picture2.jpg" width="60%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#First, we filter by Adults and create a new column for the daily approval margin
 clean_approval_polllist &lt;- clean_approval_polllist %&gt;%
   filter(subgroup == &quot;Adults&quot;) %&gt;%
