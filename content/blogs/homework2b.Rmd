@@ -70,16 +70,16 @@ bike <- bike0 %>%
 
 We can easily create a facet grid that plots bikes hired by month and year.
 
-```{r tfl_month_year_grid, echo=TRUE, out.width="60%"}
-knitr::include_graphics(here::here("images", "tfl_distributions_monthly.png"), error = FALSE)
+```{r picture4, echo=FALSE, out.width="60%"}
+knitr::include_graphics("/img/blogs/tfl_distributions_monthly.png", error=FALSE) 
 ```
 
 We can see that in the month of May and June 2020, bike rentals went down immensely, compared to previous years. This can be attributed to the national lockdowns that were enforced due to the COVID-19 pandemic during that time.
 
 Let's recreate the following graph:
 
-```{r tfl_absolute_monthly_change, echo=FALSE, out.width="60%"}
-knitr::include_graphics(here::here("images", "tfl_monthly.png"), error = FALSE)
+```{r picture5, echo=FALSE, out.width="60%"}
+knitr::include_graphics("/img/blogs/tfl_monthly.png", error=FALSE) 
 ```
 
 ```{r}
@@ -128,8 +128,8 @@ full_monthly_averages %>%
   
 The second one looks at percentage changes from the expected level of weekly rentals. Let's also recreate it.
 
-```{r tfl_percent_change, echo=FALSE, out.width="60%"}
-knitr::include_graphics(here::here("images", "tfl_weekly.png"), error = FALSE)
+```{r picture6, echo=FALSE, out.width="60%"}
+knitr::include_graphics("/img/blogs/tfl_weekly.png", error=FALSE) 
 ```
 
 ```{r}

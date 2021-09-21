@@ -38,11 +38,10 @@ bike &lt;- bike0 %&gt;%
           month = lubridate::month(day, label = TRUE),
           week = isoweek(day))</code></pre>
 <p>We can easily create a facet grid that plots bikes hired by month and year.</p>
-<pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;tfl_distributions_monthly.png&quot;), error = FALSE)</code></pre>
-<p><img src="/Users/estelletessaro/Library/Mobile Documents/com~apple~CloudDocs/2021/LBS '21-'22/Applied Statistics/my_website/images/tfl_distributions_monthly.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="/img/blogs/tfl_distributions_monthly.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>We can see that in the month of May and June 2020, bike rentals went down immensely, compared to previous years. This can be attributed to the national lockdowns that were enforced due to the COVID-19 pandemic during that time.</p>
 <p>Let’s recreate the following graph:</p>
-<p><img src="/Users/estelletessaro/Library/Mobile Documents/com~apple~CloudDocs/2021/LBS '21-'22/Applied Statistics/my_website/images/tfl_monthly.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="/img/blogs/tfl_monthly.png" width="60%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#Let&#39;s create dataframes to filter out certain years and organise them by months.
  general_monthly_average &lt;- bike %&gt;% 
   filter(year&gt;=2016 &amp; year&lt;=2019) %&gt;% 
@@ -85,7 +84,7 @@ full_monthly_averages %&gt;%
   NULL</code></pre>
 <p><img src="/blogs/homework2b_files/figure-html/unnamed-chunk-1-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>The second one looks at percentage changes from the expected level of weekly rentals. Let’s also recreate it.</p>
-<p><img src="/Users/estelletessaro/Library/Mobile Documents/com~apple~CloudDocs/2021/LBS '21-'22/Applied Statistics/my_website/images/tfl_weekly.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="/img/blogs/tfl_weekly.png" width="60%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#Let&#39;s create a dataframe to filter out certain dates and organize them by week.
 expected_bike_pw &lt;- bike %&gt;%
   filter(day &gt;= as.Date(&quot;2016-1-1&quot;) &amp; day &lt;= as.Date(&quot;2019-12-31&quot;)) %&gt;%

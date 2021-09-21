@@ -5,7 +5,7 @@ categories:
 date: "2017-10-31T21:28:43-05:00"
 description: ""
 draft: false
-image: estelle.jpg
+image: 
 keywords: ""
 slug: aboutme
 title: About Me
@@ -15,10 +15,17 @@ Hi! I'm Estelle!
 
 Like I mentioned on the previous page, I love sunsets! 
 
+```{r picture1, echo=FALSE, out.width="100%"}
+knitr::include_graphics("/img/blogs/estelle.jpg", error=FALSE) 
+```
+
 I also love other things though. First of all, I love to hang out with my friends and loved ones.
 
-```{r picture4, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/img/aboutme2.jpg", error=FALSE) 
+```{r picture2, echo=FALSE, out.width="25%"}
+knitr::include_graphics("/img/blogs/aboutme2.jpeg", error=FALSE) 
+knitr::include_graphics("/img/blogs/aboutme3.jpeg", error=FALSE) 
+knitr::include_graphics("/img/blogs/aboutme4.jpeg", error=FALSE) 
+knitr::include_graphics("/img/blogs/aboutme5.jpeg", error=FALSE) 
 ```
 
 I enjoy going to a bar with them and have a tapas and a beer in the sun, which brings me to my next point. I loooove food. Cooking food, eating food, smelling food, I love it all! 
