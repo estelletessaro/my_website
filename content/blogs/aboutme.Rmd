@@ -16,13 +16,13 @@ Hi! I'm Estelle!
 Like I mentionned on the previous page, I love sunsets! 
 
 ```{r picture3, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/img/blogs/estelle.jpg", error=FALSE)
+knitr::include_graphics("/img/estelle.jpg", error=FALSE)
 ```
 
 I also love other things though. First of all, I love to hang out with my friends and loved ones.
 
 ```{r picture4, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/img/blogs/aboutme1.jpg", error=FALSE) 
+knitr::include_graphics("/img/aboutme1.jpg", error=FALSE) 
 ```
 
 I enjoy going to a bar with them and have a tapas and a beer in the sun, which brings me to my next point. I loooove food. Cooking food, eating food, smelling food, I love it all! 
