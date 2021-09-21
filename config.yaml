@@ -85,9 +85,9 @@ params:
         subtitle: Homework 1A
         title: Opinion Polls for 2021 German Elections
         url: blogs/homework1a
-      - image: biden.jpg
+      - image: climatechange.jpg
         subtitle: Homework 2A
-        title: Biden's Approval Margins
+        title: Climate Change and Temperature Anomalies 
         url: blogs/homework2a
       - image: wine.jpg
         subtitle: Homework 1B

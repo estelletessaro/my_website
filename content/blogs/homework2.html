@@ -1,9 +1,9 @@
 ---
-title: "Biden's Approval Margins"
+title: "Climate Change and Temperature Anomalies"
 date: '2017-10-31T22:26:13-05:00'
-description: Fivethirtyeight.com has detailed data on [all polls that track the president's approval ](https://projects.fivethirtyeight.com/biden-approval-ratings). Let's analyse his approval polls since he came into office in January 2021.
+description: 
 draft: no
-image: biden.jpg
+image: climatechange.jpg
 keywords: ''
 slug: homework2a
 categories:
@@ -14,74 +14,129 @@ categories:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Fivethirtyeight.com has detailed data on <a href="https://projects.fivethirtyeight.com/biden-approval-ratings">all polls that track the president’s approval</a>. Let’s analyse his approval polls since he came into office in January 2021.</p>
-<pre><code>## Rows: 1,601
-## Columns: 22
-## $ president           &lt;chr&gt; &quot;Joseph R. Biden Jr.&quot;, &quot;Joseph R. Biden Jr.&quot;, &quot;Jos…
-## $ subgroup            &lt;chr&gt; &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls&quot;…
-## $ modeldate           &lt;chr&gt; &quot;9/19/2021&quot;, &quot;9/19/2021&quot;, &quot;9/19/2021&quot;, &quot;9/19/2021&quot;…
-## $ startdate           &lt;chr&gt; &quot;1/31/2021&quot;, &quot;2/1/2021&quot;, &quot;2/1/2021&quot;, &quot;2/2/2021&quot;, &quot;…
-## $ enddate             &lt;chr&gt; &quot;2/2/2021&quot;, &quot;2/3/2021&quot;, &quot;2/3/2021&quot;, &quot;2/4/2021&quot;, &quot;2…
-## $ pollster            &lt;chr&gt; &quot;YouGov&quot;, &quot;Rasmussen Reports/Pulse Opinion Researc…
-## $ grade               &lt;chr&gt; &quot;B+&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;A-&quot;, &quot;B&quot;, &quot;B-&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B…
-## $ samplesize          &lt;dbl&gt; 1500, 1500, 15000, 15000, 1429, 1500, 1005, 15000,…
-## $ population          &lt;chr&gt; &quot;a&quot;, &quot;lv&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;lv&quot;, &quot;a&quot;, &quot;a&quot;, &quot;lv&quot;, &quot;a…
-## $ weight              &lt;dbl&gt; 1.0856, 0.3308, 0.2786, 0.2507, 2.0760, 0.3086, 0.…
-## $ influence           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ approve             &lt;dbl&gt; 46, 52, 54, 54, 49, 49, 57, 54, 50, 54, 60, 59, 51…
-## $ disapprove          &lt;dbl&gt; 38, 46, 33, 34, 39, 48, 34, 34, 47, 34, 32, 35, 46…
-## $ adjusted_approve    &lt;dbl&gt; 47.3, 54.4, 52.5, 52.5, 49.6, 51.4, 55.9, 52.5, 52…
-## $ adjusted_disapprove &lt;dbl&gt; 38.3, 40.1, 36.3, 37.3, 39.1, 42.1, 35.1, 37.3, 41…
-## $ multiversions       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
-## $ tracking            &lt;lgl&gt; NA, TRUE, TRUE, TRUE, NA, TRUE, NA, TRUE, TRUE, TR…
-## $ url                 &lt;chr&gt; &quot;https://docs.cdn.yougov.com/460mactkmh/econTabRep…
-## $ poll_id             &lt;dbl&gt; 74332, 74338, 74366, 74367, 74348, 74347, 74345, 7…
-## $ question_id         &lt;dbl&gt; 139593, 139642, 139733, 139734, 139668, 139654, 13…
-## $ createddate         &lt;chr&gt; &quot;2/3/2021&quot;, &quot;2/4/2021&quot;, &quot;2/11/2021&quot;, &quot;2/11/2021&quot;, …
-## $ timestamp           &lt;chr&gt; &quot;13:37:08 19 Sep 2021&quot;, &quot;13:37:08 19 Sep 2021&quot;, &quot;1…</code></pre>
-<pre class="r"><code># We use `lubridate` to fix dates, as they are given as characters.
-library(lubridate) 
+<p>If we wanted to study climate change, we can find data on the <em>Combined Land-Surface Air and Sea-Surface Water Temperature Anomalies</em> in the Northern Hemisphere at <a href="https://data.giss.nasa.gov/gistemp">NASA’s Goddard Institute for Space Studies</a>. The <a href="https://data.giss.nasa.gov/gistemp/tabledata_v4/NH.Ts+dSST.txt">tabular data of temperature anomalies can be found here</a></p>
+<p>To define temperature anomalies, we need to have a reference, or base, period which NASA clearly states that it is the period between 1951-1980.</p>
+<p>For each month and year, the dataframe shows the deviation of temperature from the normal (expected). Further the dataframe is in wide format.</p>
+<pre class="r"><code>#Let&#39;s turn the table from a wide into a long format
+tidyweather &lt;- weather %&gt;% 
+  select(-c(&quot;J-D&quot;,&quot;D-N&quot;,&quot;DJF&quot;,&quot;MAM&quot;,&quot;JJA&quot;,&quot;SON&quot;)) %&gt;% 
+  pivot_longer(2:13,
+               names_to = &quot;Month&quot;,
+               values_to = &quot;delta&quot;)</code></pre>
+<p>We inspect our dataframe. It has three variables now, one each for</p>
+<ol style="list-style-type: decimal">
+<li>year,</li>
+<li>month, and</li>
+<li>delta, or temperature deviation.</li>
+</ol>
+<div id="plotting-information" class="section level2">
+<h2>Plotting Information</h2>
+<p>Let us plot the data using a time-series scatter plot, and add a trendline. To do that, we first need to create a new variable called <code>date</code> in order to ensure that the <code>delta</code> values are plot chronologically.</p>
+<pre class="r"><code>#Let&#39;s create a new dataframe where we clean the dates in our data
+tidyweather &lt;- tidyweather %&gt;%
+  mutate(date = ymd(paste(as.character(Year), Month, &quot;1&quot;)),
+         month = month(date, label=TRUE),
+         year = year(date))
 
-clean_approval_polllist &lt;- approval_polllist %&gt;%
-  mutate(enddate=mdy(enddate),
-         week=isoweek(enddate)) </code></pre>
-<div id="create-a-plot" class="section level2">
-<h2>Create a plot</h2>
-<p>We calculate the average net approval rate (approve- disapprove) for each week since he got into office. We will plot the net approval, along with its 95% confidence interval. We will try to copy the following plot:</p>
-<pre class="r"><code> knitr::include_graphics(&quot;/img/blogs/picture2.jpg&quot;, error=FALSE)</code></pre>
-<p><img src="/img/blogs/picture2.jpg" width="60%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>#First, we filter by Adults and create a new column for the daily approval margin
-clean_approval_polllist &lt;- clean_approval_polllist %&gt;%
-  filter(subgroup == &quot;Adults&quot;) %&gt;%
-  mutate(daily_approval_margin = approve - disapprove)</code></pre>
-<pre class="r"><code>#Next, we group them by week to get the weekly average from all available polls and calculate pur confidence intervals
-weekly_avg_app_rates &lt;- clean_approval_polllist %&gt;%
-  group_by(week) %&gt;%
-  summarize( mean_weekly_approval_margin = mean(daily_approval_margin, na.rm = TRUE),
-             number_polls = n(),
-             std_weekly_approval_margin = STDEV(daily_approval_margin)) %&gt;%
-
-  mutate(lower_bound_CI_app_rate = mean_weekly_approval_margin - qt(0.975, df=number_polls-1)*std_weekly_approval_margin/sqrt(number_polls),
-         upper_bound_CI_app_rate = mean_weekly_approval_margin + qt(0.975, df=number_polls-1)*std_weekly_approval_margin/sqrt(number_polls))</code></pre>
-<pre class="r"><code>#Lastly, we recreate our plot
-ggplot(weekly_avg_app_rates, aes(x=week)) +
-  geom_point(aes(y=mean_weekly_approval_margin, color=&quot;orangered&quot;)) +
-  geom_line( aes(y=mean_weekly_approval_margin, color=&quot;orangered&quot;)) +
-  geom_ribbon(aes(ymin = lower_bound_CI_app_rate, 
-                 ymax = upper_bound_CI_app_rate), 
-                 show.legend = NA,
-                 fill = &quot;grey&quot;,
-                 colour = &quot;orange&quot;, 
-                 alpha = 0.2) +
-  geom_smooth(aes(y= mean_weekly_approval_margin), fill=NA)+
-  geom_hline(yintercept=0, color=&quot;orange&quot;, size=3)+
+#Now, we can create a scatterplot for our data.
+ggplot(tidyweather, aes(x=date, y = delta))+
+  geom_point()+
+  geom_smooth(color=&quot;red&quot;) +
   theme_bw() +
   labs (
-    title = &quot;Estimating Approval Margin (Approve - Disapprove) for Joe Biden&quot;,
-    subtitle = &quot;Weekly average of all polls&quot;,
-    x = &quot;Week of the year&quot;,
-    y = &quot;Average Approval Margin (Approve - Disapprove)&quot;
-  ) +
-  theme(legend.position = &quot;none&quot;)</code></pre>
-<p><img src="/blogs/homework2_files/figure-html/unnamed-chunk-5-1.png" width="648" style="display: block; margin: auto;" /></p>
+    title = &quot;Weather Anomalies&quot;
+  )</code></pre>
+<p><img src="/blogs/homework2_files/figure-html/scatter_plot-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>We use facet_wrap to see the weather anomalies by month of the year.</p>
+<p><img src="/blogs/homework2_files/figure-html/facet_wrap-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>We remove data before 1800 and before using <code>filter</code>. Then, we use the <code>mutate</code> function to create a new variable <code>interval</code> which contains information on which period each observation belongs to.</p>
+<pre class="r"><code>#We tidy our data further to keep only what we need.
+comparison &lt;- tidyweather %&gt;% 
+  filter(Year&gt;= 1881) %&gt;%     #remove years prior to 1881
+  #create new variable &#39;interval&#39;, and assign values based on criteria below:
+  mutate(interval = case_when(
+    Year %in% c(1881:1920) ~ &quot;1881-1920&quot;,
+    Year %in% c(1921:1950) ~ &quot;1921-1950&quot;,
+    Year %in% c(1951:1980) ~ &quot;1951-1980&quot;,
+    Year %in% c(1981:2010) ~ &quot;1981-2010&quot;,
+    TRUE ~ &quot;2011-present&quot;
+  ))</code></pre>
+<p>Now that we have the <code>interval</code> variable, we can create a density plot to study the distribution of monthly deviations (<code>delta</code>), grouped by the different time periods we are interested in.</p>
+<pre class="r"><code>#Let&#39;s create a plot for the monthly deviations.
+ggplot(comparison, aes(x=delta, fill=interval))+
+  geom_density(alpha=0.2) +   #density plot with tranparency set to 20%
+  theme_bw() +                #theme
+  labs (
+    title = &quot;Density Plot for Monthly Temperature Anomalies&quot;,
+    y     = &quot;Density&quot;         #changing y-axis label to sentence case
+  )</code></pre>
+<p>So far, we have been working with monthly anomalies. However, we might be interested in average annual anomalies.</p>
+<pre class="r"><code>#creating yearly averages
+average_annual_anomaly &lt;- tidyweather %&gt;% 
+  group_by(year) %&gt;%   #grouping data by Year
+  
+  # creating summaries for mean delta 
+  # use `na.rm=TRUE` to eliminate NA (not available) values 
+  summarise(annual_average_delta = mean(delta, na.rm=TRUE))
+
+#plotting the data:
+ggplot(average_annual_anomaly, aes(x=year, y= annual_average_delta))+
+  geom_point()+
+  
+  #Fit the best fit line, using LOESS method
+  geom_smooth() +
+  
+  #change to theme_bw() to have white background + black frame around plot
+  theme_bw() +
+  labs (
+    title = &quot;Average Yearly Anomaly&quot;,
+    y     = &quot;Average Annual Delta&quot;
+  )                         </code></pre>
+</div>
+<div id="confidence-interval-for-delta" class="section level2">
+<h2>1.2. Confidence Interval for <code>delta</code></h2>
+<p><a href="https://earthobservatory.nasa.gov/world-of-change/decadaltemp.php">NASA points out on their website</a> that
+&gt; A one-degree global change is significant because it takes a vast amount of heat to warm all the oceans, atmosphere, and land by that much. In the past, a one- to two-degree drop was all it took to plunge the Earth into the Little Ice Age.</p>
+<p>We construct a confidence interval for the average annual delta since 2011, both using a formula and using a bootstrap simulation with the <code>infer</code> package.</p>
+<pre class="r"><code>formula_ci &lt;- comparison %&gt;% 
+  # choose the interval 2011-present
+  # what dplyr verb will you use? 
+  filter(year &gt;= 2011) %&gt;%
+  
+  # calculate summary statistics for temperature deviation (delta) 
+  # calculate mean, SD, count, SE, lower/upper 95% CI
+  # what dplyr verb will you use? 
+  summarise(mean_delta = mean(delta, na.rm=TRUE),
+            SD_delta = sd(delta, na.rm=TRUE),
+            count_delta = n()) %&gt;% 
+  mutate(SE_delta = SD_delta/sqrt(count_delta),
+         lower_CI = mean_delta-2*SE_delta,
+         upper_CI = mean_delta+2*SE_delta)
+
+#print out formula_CI
+formula_ci</code></pre>
+<pre class="r"><code># use the infer package to construct a 95% CI for delta
+set.seed(1234)
+
+boot_weather &lt;- comparison %&gt;%
+  # Choose only  Animation films
+  filter(year &gt;= 2011) %&gt;%
+  
+  # Specify the variable of interest
+  specify(response = delta) %&gt;%
+  
+  # Generate a bunch of bootstrap samples
+  generate(reps = 1000, type = &quot;bootstrap&quot;) %&gt;%
+  
+  # Find the median of each sample
+  calculate(stat = &quot;mean&quot;)
+
+percentile_ci &lt;- boot_weather %&gt;% 
+  get_confidence_interval(level = 0.95, type = &quot;percentile&quot;)
+percentile_ci</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##   lower_ci upper_ci
+##      &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1.02     1.11</code></pre>
+<p>The data shows us that from 2011 till present, the mean variation from expected temperature is positive 1.06 degree, the standard deviation is 0.276 and there are a total of 132 observations. With bootstrap, we generate a thousand sample means, each calculated with 132 observations extracted with replacement from our dataset, and get a new distribution representing the distribution of the population mean. With 95% confidence, we can say that the true population mean lays in the interval [1.01, 1.11].</p>
 </div>

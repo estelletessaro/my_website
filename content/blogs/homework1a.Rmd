@@ -1,7 +1,7 @@
 ---
 title: "Opinion Polls for 2021 German Elections"
 date: '2017-10-31T22:26:13-05:00'
-description: The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor). I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election).
+description: 
 draft: no
 image: germany.jpg
 keywords: ''
@@ -48,7 +48,7 @@ library(kableExtra)
 
 The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor). I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election).
 
-```{r picture1, out.width="60%"}
+```{r picture1, echo=FALSE, out.width="80%"}
 knitr::include_graphics("/img/blogs/picture1.jpg", error=FALSE)
 ```
 
@@ -95,11 +95,12 @@ german_election_polls <- polls[[1]] %>% # the first table on the page contains t
 Let's now reproduce the graph made by the Guardian. 
 
 ```{r warning=FALSE}
+#First, we clean out some null values
 german_election_polls$samplesize <- as.numeric(gsub(",","",german_election_polls$samplesize))
 german_election_polls$samplesize <- as.numeric(german_election_polls$samplesize)
 german_election_polls <- na.omit(german_election_polls)
 
-#First, we create the polls for each party
+#Next, we create the polls for each party
 german_election_polls <- german_election_polls %>%
   mutate(union_votes = union*samplesize/100,
          spd_votes = spd*samplesize/100,

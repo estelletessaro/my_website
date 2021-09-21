@@ -1,7 +1,7 @@
 ---
 title: "Opinion Polls for 2021 German Elections"
 date: '2017-10-31T22:26:13-05:00'
-description: The Guardian newspaper has an [election poll tracker for the upcoming German election](https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor). I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at [Wikipedia](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election).
+description: 
 draft: no
 image: germany.jpg
 keywords: ''
@@ -15,8 +15,7 @@ categories:
 
 
 <p>The Guardian newspaper has an <a href="https://www.theguardian.com/world/2021/aug/20/german-election-poll-tracker-who-will-be-the-next-chancellor">election poll tracker for the upcoming German election</a>. I reproduce the graph similar to the one produced by the Guardian, based on opinion polls since Jan 2021 that can be found at <a href="https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election">Wikipedia</a>.</p>
-<pre class="r"><code>knitr::include_graphics(&quot;/img/blogs/picture1.jpg&quot;, error=FALSE)</code></pre>
-<p><img src="/img/blogs/picture1.jpg" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="/img/blogs/picture1.jpg" width="80%" style="display: block; margin: auto;" /></p>
 <p>The following code will scrape the wikipedia page and import the table in a dataframe.</p>
 <pre class="r"><code>url &lt;- &quot;https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_German_federal_election&quot;
 # https://www.economist.com/graphic-detail/who-will-succeed-angela-merkel
@@ -52,11 +51,12 @@ german_election_polls &lt;- polls[[1]] %&gt;% # the first table on the page cont
          week = isoweek(end_date)
          )</code></pre>
 <p>Let’s now reproduce the graph made by the Guardian.</p>
-<pre class="r"><code>german_election_polls$samplesize &lt;- as.numeric(gsub(&quot;,&quot;,&quot;&quot;,german_election_polls$samplesize))
+<pre class="r"><code>#First, we clean out some null values
+german_election_polls$samplesize &lt;- as.numeric(gsub(&quot;,&quot;,&quot;&quot;,german_election_polls$samplesize))
 german_election_polls$samplesize &lt;- as.numeric(german_election_polls$samplesize)
 german_election_polls &lt;- na.omit(german_election_polls)
 
-#First, we create the polls for each party
+#Next, we create the polls for each party
 german_election_polls &lt;- german_election_polls %&gt;%
   mutate(union_votes = union*samplesize/100,
          spd_votes = spd*samplesize/100,

@@ -1,8 +1,7 @@
 ---
 title: "Where People Drink the Most Wine, Beer and Spirits"
 date: '2017-10-31T22:26:13-05:00'
-description: Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. I analyse and plot consumption of beer, wine and spirits by country.
-draft: no
+description: 
 image: wine.jpg
 keywords: ''
 slug: homework1b
@@ -49,7 +48,7 @@ library(kableExtra)
 Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. I analyse and plot consumption of beer, wine and spirits by country.
 
 
-```{r, load_alcohol_data, echo=FALSE}
+```{r, load_alcohol_data, echo=FALSE, include=FALSE}
 library(fivethirtyeight)
 data(drinks)
 
@@ -60,7 +59,7 @@ alcohol_direct <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/da
 ```
 
 
-```{r glimpse_skim_data, echo=FALSE}
+```{r glimpse_skim_data, echo=FALSE, include=FALSE}
 alcohol_direct %>% 
   glimpse() %>%
   skim()

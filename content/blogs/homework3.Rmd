@@ -3,7 +3,7 @@ categories:
 - ""
 - ""
 date: "2017-10-31T22:26:13-05:00"
-description: We are asked to carry out an analysis on gender discrimination at Omega - Plc.
+description: 
 draft: false
 image: genderdiscrimination.jpg
 keywords: ""
@@ -72,9 +72,7 @@ We calculate summary statistics on salary by gender. Also, create and print a da
 # Summary Statistics of salary by gender
 mosaic::favstats (salary ~ gender, data=omega)
 
-# Dataframe with two rows (male-female) and having as columns gender, mean, SD, sample size, 
-# the t-critical value, the standard error, the margin of error, 
-# and the low/high endpoints of a 95% condifence interval
+# We create a dataframe with two rows (male-female) and having as columns gender, mean, SD, sample size, the t-critical value, the standard error, the margin of error, and the low/high endpoints of a 95% condifence interval
 
 gender_salary <- omega %>%
   group_by(gender) %>%
@@ -88,7 +86,8 @@ gender_salary <- omega %>%
          margin_of_error = t_critical*SE_sal,
          lower_bound_CI_sal = mean_sal - (1.96*stder_sal),
          upper_bound_CI_sal = mean_sal + (1.96*stder_sal))
-  
+
+gender_salary  
 ```
 
 
@@ -98,10 +97,10 @@ From the analysis above, we can conclude that the difference between the relatio
 We can also run a hypothesis testing, assuming as a null hypothesis that the mean difference in salaries is zero, or that, on average, men and women make the same amount of money. We tun your hypothesis testing using `t.test()` and with the simulation method from the `infer` package.
 
 ```{r, hypothesis_testing}
-# hypothesis testing using t.test() 
+# We do hypothesis testing using t.test() 
 t.test(salary ~ gender, data = omega)
 
-# hypothesis testing using infer package
+# Next, we do hypothesis testing using infer package
 infer_gender_salary <- omega %>%
   specify(salary ~ gender) %>%
   calculate(stat = "diff in means", order = c("male", "female"))
@@ -143,6 +142,8 @@ gender_experience <- omega %>%
          margin_of_error = t_critical*SE_exp,
          lower_bound_CI_exp = mean_exp - (1.96*stder_exp),
          upper_bound_CI_exp = mean_exp + (1.96*stder_exp))
+
+gender_experience
 ```
 
 Based on this evidence, can we conclude that there is a significant difference between the experience of the male and female executives? Let's perform similar analyses as in the previous section. Does our conclusion validate or endanger our conclusion about the difference in male and female salaries?  
@@ -157,6 +158,7 @@ We analyse the relationship between salary and experience and draw a scatterplot
 
 
 ```{r, salary_exp_scatter}
+#Let's create a scatterplot to visualise our data.
 
 ggplot(omega, aes(x=salary, y = experience))+
   geom_point()+
@@ -174,6 +176,8 @@ From the scatterplot above, we can see a clear correlation between salary and ex
 We use `GGally:ggpairs()` to create a scatterplot and correlation matrix. Essentially, we change the order our variables will appear in and have the dependent variable (Y), salary, as last in our list. We then pipe the dataframe to `ggpairs()` with `aes` arguments to colour by `gender` and make ths plots somewhat transparent (`alpha  = 0.3`).
 
 ```{r, ggpairs}
+#We use `GGally:ggpairs()` to create a scatterplot and correlation matrix
+
 omega %>% 
   select(gender, experience, salary) %>% #order variables they will appear in ggpairs()
   ggpairs(aes(colour=gender, alpha = 0.3))+
