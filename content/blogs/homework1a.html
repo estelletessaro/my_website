@@ -141,18 +141,19 @@ colors &lt;- c(&quot;Union&quot; = &quot;black&quot;, &quot;SPD&quot; = &quot;re
             &quot;FDP&quot; = &quot;yellow&quot;, &quot;Linke&quot; = &quot;purple&quot;, &quot;Grune&quot; = &quot;green&quot;)
 
 ggplot(daily_german_election_polls, aes(x=end_date)) +
-  geom_point(aes(y=union_rate), color=&quot;black&quot;, size=0.7, alpha=0.3) +
+  geom_point(aes(y=union_rate), color=&quot;black&quot;, size=0.9, alpha=0.3) +
   geom_line(aes(y=union_rate_14d, color=&quot;Union&quot;), size=0.7) +
-  geom_point(aes(y=spd_rate), color=&quot;red&quot;, size=0.7, alpha=0.3) +
+  geom_point(aes(y=spd_rate), color=&quot;red&quot;, size=0.9, alpha=0.3) +
   geom_line(aes(y=spd_rate_14d, color=&quot;SPD&quot;), size=0.7) +
-  geom_point(aes(y=af_d_rate), color=&quot;blue&quot;, size=0.7, alpha=0.3) +
+  geom_point(aes(y=af_d_rate), color=&quot;blue&quot;, size=0.9, alpha=0.3) +
   geom_line(aes(y=af_d_rate_14d, color=&quot;AfD&quot;), size=0.7) +
-  geom_point(aes(y=fdp_rate), color=&quot;yellow&quot;, size=0.7, alpha=0.3) +
+  geom_point(aes(y=fdp_rate), color=&quot;yellow&quot;, size=0.9, alpha=0.3) +
   geom_line(aes(y=fdp_rate_14d, color=&quot;FDP&quot;), size=0.7) +
-  geom_point(aes(y=linke_rate), color=&quot;purple&quot;, size=0.7, alpha=0.3) +
+  geom_point(aes(y=linke_rate), color=&quot;purple&quot;, size=0.9, alpha=0.3) +
   geom_line(aes(y=linke_rate_14d, color=&quot;Linke&quot;), size=0.7) +
-  geom_point(aes(y=grune_rate), color=&quot;green&quot;, size=0.7, alpha=0.3) +
+  geom_point(aes(y=grune_rate), color=&quot;green&quot;, size=0.9, alpha=0.3) +
   geom_line(aes(y=grune_rate_14d, color=&quot;Grune&quot;), size=0.7) +
+  theme_bw() +
   labs(title=&quot;German election poll tracker: who will be the next chancellor?&quot;,
        x=&quot;Date&quot;,
        y=&quot;Vote Percentage&quot;,
