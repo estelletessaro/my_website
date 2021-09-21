@@ -1,7 +1,8 @@
 ---
 title: "London Bike Rentals over Time"
 date: '2017-10-31T22:26:13-05:00'
-description: TfL releases data on how many bikes were hired every single day. Let's look at monthly bike hires over the years.
+description: TfL releases data on how many bikes were hired every single day. Let's
+  look at monthly bike hires over the years.
 draft: no
 image: londonbike.jpg
 keywords: ''
@@ -14,8 +15,6 @@ categories:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<div id="excess-rentals-in-tfl-bike-sharing" class="section level1">
-<h1>Excess rentals in TfL bike sharing</h1>
 <p>TfL releases data on how many bikes were hired every single day. We can get the latest data by running the following</p>
 <pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
 
@@ -44,7 +43,6 @@ bike &lt;- bike0 %&gt;%
 <p><img src="/Users/estelletessaro/Library/Mobile Documents/com~apple~CloudDocs/2021/LBS '21-'22/Applied Statistics/my_website/images/tfl_distributions_monthly.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>We can see that in the month of May and June 2020, bike rentals went down immensely, compared to previous years. This can be attributed to the national lockdowns that were enforced due to the COVID-19 pandemic during that time.</p>
 <p>Let’s recreate the following graph:</p>
-<pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;tfl_monthly.png&quot;), error = FALSE)</code></pre>
 <p><img src="/Users/estelletessaro/Library/Mobile Documents/com~apple~CloudDocs/2021/LBS '21-'22/Applied Statistics/my_website/images/tfl_monthly.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#Let&#39;s create dataframes to filter out certain years and organise them by months.
  general_monthly_average &lt;- bike %&gt;% 
@@ -88,7 +86,6 @@ full_monthly_averages %&gt;%
   NULL</code></pre>
 <p><img src="/blogs/homework2b_files/figure-html/unnamed-chunk-1-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>The second one looks at percentage changes from the expected level of weekly rentals. Let’s also recreate it.</p>
-<pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;tfl_weekly.png&quot;), error = FALSE)</code></pre>
 <p><img src="/Users/estelletessaro/Library/Mobile Documents/com~apple~CloudDocs/2021/LBS '21-'22/Applied Statistics/my_website/images/tfl_weekly.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#Let&#39;s create a dataframe to filter out certain dates and organize them by week.
 expected_bike_pw &lt;- bike %&gt;%
@@ -143,4 +140,3 @@ weekly_plot</code></pre>
 <p><img src="/blogs/homework2b_files/figure-html/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>For both of these graphs, we to calculate the expected number of rentals per week or month between 2016-2019 and then, we see how each week/month of 2020-2021 compares to the expected rentals. Think of the calculation <code>excess_rentals = actual_rentals - expected_rentals</code>.</p>
 <p>Note: We can see massive spikes in the previous graph, so it might be more useful to use the median rather than the mean, as extreme values won’t affect it as much.</p>
-</div>

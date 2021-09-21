@@ -1,7 +1,8 @@
 ---
 title: "London Bike Rentals over Time"
 date: '2017-10-31T22:26:13-05:00'
-description: TfL releases data on how many bikes were hired every single day. Let's look at monthly bike hires over the years.
+description: TfL releases data on how many bikes were hired every single day. Let's
+  look at monthly bike hires over the years.
 draft: no
 image: londonbike.jpg
 keywords: ''
@@ -46,9 +47,6 @@ library(infer)
 ```
 
 
-
-# Excess rentals in TfL bike sharing
-
 TfL releases data on how many bikes were hired every single day. We can get the latest data by running the following
 
 ```{r, get_tfl_data, cache=TRUE}
@@ -81,7 +79,7 @@ We can see that in the month of May and June 2020, bike rentals went down immens
 
 Let's recreate the following graph:
 
-```{r tfl_absolute_monthly_change, echo=TRUE, out.width="100%"}
+```{r tfl_absolute_monthly_change, echo=FALSE, out.width="100%"}
 knitr::include_graphics(here::here("images", "tfl_monthly.png"), error = FALSE)
 ```
 
@@ -131,7 +129,7 @@ full_monthly_averages %>%
   
 The second one looks at percentage changes from the expected level of weekly rentals. Let's also recreate it.
 
-```{r tfl_percent_change, echo=TRUE, out.width="100%"}
+```{r tfl_percent_change, echo=FALSE, out.width="100%"}
 knitr::include_graphics(here::here("images", "tfl_weekly.png"), error = FALSE)
 ```
 
