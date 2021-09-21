@@ -209,13 +209,3 @@ ggplot(daily_german_election_polls, aes(x=end_date)) +
   scale_colour_manual(values = colors)
 
 ```
-
-
-
-
-
-
-
-
-
-
