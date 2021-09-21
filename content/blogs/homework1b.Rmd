@@ -153,6 +153,6 @@ ggarrange(beer_plot, wine_plot, spirit_plot,
 ```
 
 So what can we infer from these plots?
+
 First we notice that European countries tend to consume more wine and beer than spirits.
 It is surprising to see that Germany is only number 4 in the beer consumer ranking behind Gabon, Namibia...
-
